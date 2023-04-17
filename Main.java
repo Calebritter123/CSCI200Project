@@ -103,25 +103,57 @@ public class Main {
 	public static void main(String[] args) {
 		//old main as a method so i can try to make a menu
 		testFunctions();
+
+		
+		
 		/*
 		String input;
 		Scanner userInput = new Scanner(System.in);
 		
 		System.out.println("Welcome to set calculator 3000");
-		System.out.println("To modify or create a single set, press 1");
-		System.out.println("To compare more than one set, press 2, or q to quit.");
-		input = userInput.nextLine();
 		
-		while (input != "q") {
+		do {
+			
+			System.out.println("To modify or create a single set, press 1");
+			System.out.println("To compare more than one set, press 2, or q to quit.");
+			input = userInput.nextLine();
+				
+			
 		switch (input) {
 		case "q": 
+			System.out.println("Goodbye.");
 			System.exit(0);
 		case "1": 
 			System.out.println();
 			System.out.println();
-			System.out.println("A: modify a set.");
-			System.out.println("B: Create a set.");
-			break;
+			System.out.println("1: Modify a set.");
+			System.out.println("2: Create a set.");
+			System.out.println("3: Back.");
+			System.out.println("q: QUIT");
+			input = userInput.nextLine();
+			switch (input) {
+				case "q": 
+					System.out.println("Goodbye.");
+					System.exit(0);
+				case "1": 
+					
+					
+
+				case "2": 
+					
+					
+					
+					
+					
+				case "3": 
+					break;
+					
+			default: System.out.println("Unknown input: " + input);		
+			}//end inner switch
+			
+			
+			
+			
 		case "2":
 			System.out.println();
 			System.out.println();
@@ -135,15 +167,18 @@ public class Main {
 			
 			
 			
-			
 			}//end switch
-		}//end while
+			
+		System.out.println("To modify or create a single set, press 1");
+		System.out.println("To compare more than one set, press 2, or q to quit.");
+		input = userInput.nextLine();
+			
+		} while (input != "q"); //end while
 		
-		
-		*/
-		
-		
-		
+		//Should be impossible to get here.
+		System.out.println("How did you even get here?");	
+	
+	*/
 	} //ends main
 }	//ends class
 
