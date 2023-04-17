@@ -20,15 +20,28 @@ public class Main {
 	
 	public static void union(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to get values from, and make set the union to newVector.
+		
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> secondOne = secondSet.getSet();
-		Vector<Character> newVector = new Vector<Character>();
+		Vector<Character> newVector = new Vector<Character>();	
+		Vector<Character> original = new Vector<Character>();	
+		
+		for (int i = 0; i < secondOne.size(); i++) {
+			original.add(secondOne.elementAt(i)); 
+		}
 		
 		newVector.addAll(firstOne); 	//Add all of the first set into the new vector.
 		secondOne.removeAll(firstOne);	//Remove all of the first elements from the second Set.
 		newVector.addAll(secondOne);	//Add the remaining second Set into the new Vector.
-
+		
 		System.out.println("Union(" + firstSet.getName() + "," + secondSet.getName() + ") = " + newVector);
+		
+		
+		secondOne.clear();
+		for (int i = 0; i < original.size(); i++) {
+			secondOne.add(original.elementAt(i)); 
+		}
+		
 	}
 	
 	public static void isSubset(classSets firstSet, classSets secondSet) {
@@ -79,7 +92,9 @@ public class Main {
 				
 				union(set1, set2);
 				System.out.println();	
-		
+				
+				set1.printSet();
+				set2.printSet();
 	}
 	
 	
@@ -87,7 +102,8 @@ public class Main {
 	
 	public static void main(String[] args) {
 		//old main as a method so i can try to make a menu
-		//testFunctions();
+		testFunctions();
+		/*
 		String input;
 		Scanner userInput = new Scanner(System.in);
 		
@@ -124,7 +140,7 @@ public class Main {
 		}//end while
 		
 		
-		
+		*/
 		
 		
 		
