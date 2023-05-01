@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 			
-	public static void powerSetA(classSets firstSet) {
+	public static void powerSet(classSets firstSet) {
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> original1 = new Vector<Character>();		
 		
@@ -96,7 +96,7 @@ public class Main {
 		}
 	}
 	
-	public static void differenceAB(classSets firstSet, classSets secondSet) {
+	public static void difference(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to get values from, and make set the intersection to newVector.
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> secondOne = secondSet.getSet();
@@ -164,7 +164,7 @@ public class Main {
 	}
 
 	
-	public static void cartesianProductAB(classSets firstSet, classSets secondSet) {
+	public static void cartesianProduct(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to get values from, and make set the intersection to newVector.
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> secondOne = secondSet.getSet();
@@ -208,6 +208,8 @@ public class Main {
 				classSets set2 = new classSets();
 				int numberOfClasses = 0;
 				
+				
+				
 				//Set their names properly.
 				set1.setName(numberOfClasses); 
 				numberOfClasses++;
@@ -243,13 +245,14 @@ public class Main {
 				
 				union(set1, set2);
 				intersection(set1, set2);
-				differenceAB(set1, set2);
-				differenceAB(set2, set1);
-				cartesianProductAB(set1, set2);
-				cartesianProductAB(set2, set1);
+				difference(set1, set2);
+				difference(set2, set1);
+				cartesianProduct(set1, set2);
+				cartesianProduct(set2, set1);
 				System.out.println();
 				
-				powerSetA(set1);
+				powerSet(set1);
+				powerSet(set2);
 				
 				set1.printSet();
 				set2.printSet();
@@ -262,8 +265,8 @@ public class Main {
 	public static void main(String[] args) {
 		//old main as a method so i can try to make a menu
 		testFunctions();
-		/*
 		
+		/*
 		String input;
 		Scanner userInput = new Scanner(System.in);
 		
@@ -325,17 +328,13 @@ public class Main {
 			
 			
 			}//end switch
-			
-		System.out.println("To modify or create a single set, press 1");
-		System.out.println("To compare more than one set, press 2, or q to quit.");
-		input = userInput.nextLine();
-			
+						
 		} while (input != "q"); //end while
 		
 		//Should be impossible to get here.
 		System.out.println("How did you even get here?");	
-	*/
 	
+	*/
 	} //ends main
 }	//ends class
 
