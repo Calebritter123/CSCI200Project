@@ -1,10 +1,8 @@
 import java.util.Vector;
-
-
+import java.util.Scanner;
 
 public class Main {
-
-	// power set of a and b
+			
 	public static void powerSetA(classSets firstSet) {
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> original1 = new Vector<Character>();		
@@ -37,27 +35,31 @@ public class Main {
 		}	
 		System.out.print("}}");
 		System.out.println();
+		
+		firstOne.addAll(original1);
+		
 	}
+		
 	
-	// check equality of a and b
 	
-	public static void equals(classSets firstSet, classSets secondSet) {
+	public static boolean equals(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to compare.
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> secondOne = secondSet.getSet();
-
+		
 		//Check if the two vectors are equal, and print the result.
 		if (firstOne.equals(secondOne)) {
 			System.out.println(firstSet.getName() + " = " + secondSet.getName() + ": true");
+			return true;
 		} else {
 			System.out.println(firstSet.getName() + " = " + secondSet.getName() + ": false");
+			return false;
 		}
 	}
-
-	// union of a and b
 	
 	public static void union(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to get values from, and make set the union to newVector.
+		
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> secondOne = secondSet.getSet();
 		Vector<Character> newVector = new Vector<Character>();	
@@ -78,46 +80,21 @@ public class Main {
 		for (int i = 0; i < original.size(); i++) {
 			secondOne.add(original.elementAt(i)); 
 		}
+		
 	}
 	
-	// intersection of a and b
-	
-	public static void intersection(classSets firstSet, classSets secondSet) {
-		//Make 2 vectors to get values from, and make set the intersection to newVector.
+	public static void isSubset(classSets firstSet, classSets secondSet) {
+		//Make 2 vectors to compare.
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> secondOne = secondSet.getSet();
-		Vector<Character> newVector = new Vector<Character>();
-		Vector<Character> original1 = new Vector<Character>();	
-		Vector<Character> original2 = new Vector<Character>();	
 		
-		for (int i = 0; i < firstOne.size(); i++) {
-			original1.add(firstOne.elementAt(i)); 
-		}
-		
-		for (int i = 0; i < secondOne.size(); i++) {
-			original2.add(secondOne.elementAt(i)); 
-		}
-		
-		// use for loop to add values to new vector for intersection
-		for(int i = 0; i < firstOne.size(); i++) {
-			for(int j = 0; j < secondOne.size(); j++) {
-				if (firstOne.get(i) == secondOne.get(j)) {
-					newVector.add(firstOne.get(i));
-				}
-			}
-		}
-		
-		System.out.println("Intersection(" + firstSet.getName() + "," + secondSet.getName() + ") = " + newVector);
-		
-		for (int i = 0; i < original1.size(); i++) {
-			firstOne.add(original1.elementAt(i)); 
-		}
-		for (int i = 0; i < original2.size(); i++) {
-			secondOne.add(original2.elementAt(i)); 
+		//Check if the first vector is inside the second vector and print result.
+		if (secondOne.containsAll(firstOne)) {
+			System.out.println(firstSet.getName() + " is a subset of " + secondSet.getName() + ": true" );
+		} else {
+			System.out.println(firstSet.getName() + " is a subset of " + secondSet.getName() + ": false" );
 		}
 	}
-
-	// difference from a to b
 	
 	public static void differenceAB(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to get values from, and make set the intersection to newVector.
@@ -149,12 +126,11 @@ public class Main {
 		}
 	}
 	
-	// difference from b to a
-	
-	public static void differenceBA(classSets firstSet, classSets secondSet) {
+	public static void intersection(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to get values from, and make set the intersection to newVector.
 		Vector<Character> firstOne = firstSet.getSet();
 		Vector<Character> secondOne = secondSet.getSet();
+		Vector<Character> newVector = new Vector<Character>();
 		Vector<Character> original1 = new Vector<Character>();	
 		Vector<Character> original2 = new Vector<Character>();	
 		
@@ -167,9 +143,15 @@ public class Main {
 		}
 		
 		// use for loop to add values to new vector for intersection
-		secondOne.removeAll(firstOne);
+		for(int i = 0; i < firstOne.size(); i++) {
+			for(int j = 0; j < secondOne.size(); j++) {
+				if (firstOne.get(i) == secondOne.get(j)) {
+					newVector.add(firstOne.get(i));
+				}
+			}
+		}
 		
-		System.out.println("Difference(" + secondSet.getName() + "," + firstSet.getName() + ") = " + secondOne);
+		System.out.println("Intersection(" + firstSet.getName() + "," + secondSet.getName() + ") = " + newVector);
 		
 		firstOne.clear();
 		secondOne.clear();
@@ -180,8 +162,7 @@ public class Main {
 			secondOne.add(original2.elementAt(i)); 
 		}
 	}
-	
-	// cartesian product from a to b
+
 	
 	public static void cartesianProductAB(classSets firstSet, classSets secondSet) {
 		//Make 2 vectors to get values from, and make set the intersection to newVector.
@@ -220,102 +201,146 @@ public class Main {
 		System.out.println();
 	}
 	
-	// cartesian product from b to a
-	
-	public static void cartesianProductBA(classSets firstSet, classSets secondSet) {
-		//Make 2 vectors to get values from, and make set the intersection to newVector.
-		Vector<Character> firstOne = firstSet.getSet();
-		Vector<Character> secondOne = secondSet.getSet();
-		Vector<Character> original1 = new Vector<Character>();	
-		Vector<Character> original2 = new Vector<Character>();	
+	public static void testFunctions() {
+		//Default Examples Classes and their values.
 		
-		for (int i = 0; i < firstOne.size(); i++) {
-			original1.add(firstOne.elementAt(i)); 
-		}
-		
-		for (int i = 0; i < secondOne.size(); i++) {
-			original2.add(secondOne.elementAt(i)); 
-		}
-		
-		System.out.print("Cartesian Product(" + secondSet.getName() + "," + firstSet.getName() + ") = {");
-		
-		for(int i = 0; i < secondOne.size(); i++) {
-			for(int j = 0; j < firstOne.size(); j++) {
-				System.out.print("(" + secondOne.get(i) + ", " + firstOne.get(j) + ")");
-			}
-		}
-		
-		System.out.print("}");
-		
-		firstOne.clear();
-		secondOne.clear();
-		for (int i = 0; i < original1.size(); i++) {
-			firstOne.add(original1.elementAt(i)); 
-		}
-		for (int i = 0; i < original2.size(); i++) {
-			secondOne.add(original2.elementAt(i)); 
-		}
-		
-		System.out.println();
+				classSets set1 = new classSets();
+				classSets set2 = new classSets();
+				int numberOfClasses = 0;
+				
+				//Set their names properly.
+				set1.setName(numberOfClasses); 
+				numberOfClasses++;
+				set2.setName(numberOfClasses);	
+				numberOfClasses++;
+				
+				//Set their values properly.
+				set1.addElement('1'); set1.addElement('2'); set1.addElement('3'); 
+				set2.addElement('1'); set2.addElement('2'); set2.addElement('4'); 
+
+				//Test printing out the sets using the classSets class.
+				set1.printSet();
+				set2.printSet();
+				System.out.println();	
+				
+				//Test printing the Cardinality of the set using the classSets class.
+				set1.printCardinality();
+				set2.printCardinality();
+				System.out.println();	
+				
+				//Test various methods and stuff.
+				equals(set1, set2);
+				isSubset(set1, set2);
+				isSubset(set2, set1);
+				System.out.println();	
+				
+				union(set1, set2);
+				System.out.println();	
+				
+				set1.printSet();
+				set2.printSet();
+				
+				
+				union(set1, set2);
+				intersection(set1, set2);
+				differenceAB(set1, set2);
+				differenceAB(set2, set1);
+				cartesianProductAB(set1, set2);
+				cartesianProductAB(set2, set1);
+				System.out.println();
+				
+				powerSetA(set1);
+				
+				set1.printSet();
+				set2.printSet();
+				
 	}
 	
-	// are the sets subsets
 	
-	public static void isSubset(classSets firstSet, classSets secondSet) {
-		//Make 2 vectors to compare.
-		Vector<Character> firstOne = firstSet.getSet();
-		Vector<Character> secondOne = secondSet.getSet();
-
-		//Check if the first vector is inside the second vector and print result.
-		if (secondOne.containsAll(firstOne)) {
-			System.out.println(firstSet.getName() + " is a subset of " + secondSet.getName() + ": true" );
-		} else {
-			System.out.println(firstSet.getName() + " is a subset of " + secondSet.getName() + ": false" );
-		}
-	}
-
-	// entering main
+	
 	
 	public static void main(String[] args) {
-		//Default Examples Classes and their values.
-		classSets set1 = new classSets();
-		classSets set2 = new classSets();
-
-		//Set their names properly.
-		set1.setName("A"); 
-		set2.setName("B");	
-
-		//Set their values properly.
-		set1.addElement('1'); set1.addElement('2'); set1.addElement('3'); 
-		set2.addElement('1'); set2.addElement('2'); 
-
-		//Test printing out the sets using the classSets class.
-		set1.printSet();
-		set2.printSet();
-		System.out.println();	
-
-		//Test printing the Cardinality of the set using the classSets class.
-		set1.printCardinality();
-		set2.printCardinality();
-		System.out.println();	
-
-		//Test various methods and stuff.
-		powerSetA(set1);
-		//powerSetA(set1);
-		System.out.println();
+		//old main as a method so i can try to make a menu
+		testFunctions();
+		/*
 		
-		equals(set1, set2);
-		isSubset(set1, set2);
-		isSubset(set2, set1);
-		System.out.println();	
+		String input;
+		Scanner userInput = new Scanner(System.in);
+		
+		System.out.println("Welcome to set calculator 3000");
+		
+		do {
+			
+			System.out.println("To modify or create a single set, press 1");
+			System.out.println("To compare more than one set, press 2, or q to quit.");
+			input = userInput.nextLine();
+				
+			
+		switch (input) {
+		case "q": 
+			System.out.println("Goodbye.");
+			System.exit(0);
+		case "1": 
+			System.out.println();
+			System.out.println();
+			System.out.println("1: Modify a set.");
+			System.out.println("2: Create a set.");
+			System.out.println("3: Back.");
+			System.out.println("q: QUIT");
+			input = userInput.nextLine();
+			switch (input) {
+				case "q": 
+					System.out.println("Goodbye.");
+					System.exit(0);
+				case "1": 
+					
+					
 
-		union(set1, set2);
-		intersection(set1, set2);
-		differenceAB(set1, set2);
-		differenceBA(set1, set2);
-		cartesianProductAB(set1, set2);
-		cartesianProductBA(set1, set2);
-		System.out.println();	
-
+				case "2": 
+					
+					
+					
+					
+					
+				case "3": 
+					break;
+					
+			default: System.out.println("Unknown input: " + input);		
+			}//end inner switch
+			
+			
+			
+			
+		case "2":
+			System.out.println();
+			System.out.println();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}//end switch
+			
+		System.out.println("To modify or create a single set, press 1");
+		System.out.println("To compare more than one set, press 2, or q to quit.");
+		input = userInput.nextLine();
+			
+		} while (input != "q"); //end while
+		
+		//Should be impossible to get here.
+		System.out.println("How did you even get here?");	
+	*/
+	
 	} //ends main
 }	//ends class
+
+
+
+
+
+
